@@ -6,6 +6,6 @@ Data Description: "The dataset contains current inspection data for cafeterias p
 1. Business Process
 2. Requirements For data from 2020, I want to know the trends amongst the imspection out comes in each neighborhood in NYC.
 3. Get Data and Profiling the Data Include for the violation, locations, violation severity etc.
-4. Source: [NYC Open Data](https://data.cityofnewyork.us/Health/DOHMH-School-Cafeteria-Inspections-2020-Present-/5ery-qagt/about_data)
-Data Dictionary: [Readme.md](https://data.cityofnewyork.us/Health/DOHMH-School-Cafeteria-Inspections-2020-Present-/5ery-qagt/about_data)
-5. Dimensional Modeling: [Readme.md](https://data.cityofnewyork.us/Health/DOHMH-School-Cafeteria-Inspections-2020-Present-/5ery-qagt/about_data)
+4. Data Source: [NYC Open Data](https://data.cityofnewyork.us/Health/DOHMH-School-Cafeteria-Inspections-2020-Present-/5ery-qagt/about_data)
+Data Dictionary: [Readme.md](https://github.com/nicolerodriguez16/DOHMH-School-Cafeteria-Inspections-2020-Present-/blob/main/docs/School_cafeteria_data_dictionary_FINAL__9.23.2020_%20(1).xlsx)
+5. Dimensional Modeling: [Readme.md](https://github.com/nicolerodriguez16/DOHMH-School-Cafeteria-Inspections-2020-Present-/blob/main/datamodel/Untitled.dbs.bak)
