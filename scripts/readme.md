@@ -1,0 +1,1 @@
+The scripts demostrated the process of importing The New York City Department of Health and Mental Hygiene (NYC DOHMH)-School-Cafeteria-Inspections-2020- Present data into Microsoft Azure.  The data was downloaded and exported on 5/07/24

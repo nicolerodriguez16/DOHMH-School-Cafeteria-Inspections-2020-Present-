@@ -1,0 +1,1 @@
+The dimensional model visualizes the New York City Department of Health and Mental Hygiene (NYC DOHMH)-School-Cafeteria-Inspections-2020- Present process as a star schema.  This model is structured around a facts table that calls on other dimensions. These dimensions include:
