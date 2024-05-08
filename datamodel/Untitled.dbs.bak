@@ -108,7 +108,7 @@
 			<column name="date_id" type="INT" jt="4" mandatory="y" />
 			<column name="permitee_id" type="INT" jt="4" mandatory="y" />
 			<column name="last_inspection_date_id" type="INT" jt="4" mandatory="y" />
-			<column name="inspection_date_id" type="INT" jt="4" />
+			<column name="inspection_date_id" type="INT" jt="4" mandatory="y" />
 			<index name="pk_facts_dobmhschoolcafeteria" unique="PRIMARY_KEY" >
 				<column name="fact_id" />
 			</index>
@@ -139,10 +139,10 @@
 			<fk name="fk_facts_dobmhschoolcafeteria_dim_permitees" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.INSTANCE" to_table="dim_permitees" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="permitee_id" pk="permitee_id" />
 			</fk>
-			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_0" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.INSTANCE" to_table="dim_date" type="ManyToMany" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_0" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="last_inspection_date_id" pk="date_id" />
 			</fk>
-			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_1" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.INSTANCE" to_table="dim_date" type="ManyToMany" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_1" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="inspection_date_id" pk="date_id" />
 			</fk>
 		</table>
