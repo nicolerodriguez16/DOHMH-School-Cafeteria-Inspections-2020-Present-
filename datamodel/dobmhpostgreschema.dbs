@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="DOHMH-School-Cafeteria-Inspections-2020-Present" id="PostgreSQL-1ec4" database="PostgreSQL" >
+	<schema name="instance" catalogname="DOHMH-School-Cafeteria-Inspections-2020-Present" >
+		<table name="dim_borough" >
+			<column name="borough_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[the borocode is the id]]></comment>
+			</column>
+			<column name="borough" type="varchar" length="300" jt="12" />
+			<index name="pk_dim_borough" unique="PRIMARY_KEY" >
+				<column name="borough_id" />
+			</index>
+		</table>
+		<table name="dim_building" >
+			<column name="building_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[the bin is the id]]></comment>
+			</column>
+			<column name="building" type="varchar" length="350" jt="12" />
+			<index name="pk_dim_building" unique="PRIMARY_KEY" >
+				<column name="building_id" />
+			</index>
+		</table>
+		<table name="dim_census_tract" >
+			<column name="census_tract_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[the census tract is the id]]></comment>
+			</column>
+			<column name="community_board" type="integer" jt="4" />
+			<column name="council_district" type="integer" jt="4" />
+			<column name="nta" type="varchar" length="350" jt="12" />
+			<index name="pk_dim_census_tract" unique="PRIMARY_KEY" >
+				<column name="census_tract_id" />
+			</index>
+		</table>
+		<table name="dim_date" >
+			<column name="date_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[MAKE ONE]]></comment>
+			</column>
+			<column name="year" type="integer" jt="4" />
+			<column name="month_number" type="integer" jt="4" />
+			<column name="quarter" type="integer" jt="4" />
+			<column name="day_name" type="varchar" length="350" jt="12" />
+			<column name="month_name" type="varchar" length="350" jt="12" />
+			<column name="week_of_the_month" type="integer" jt="4" />
+			<column name="week_of_year" type="integer" jt="4" />
+			<column name="date_iso_format" type="date" jt="91" />
+			<index name="pk_dim_date" unique="PRIMARY_KEY" >
+				<column name="date_id" />
+			</index>
+		</table>
+		<table name="dim_location" >
+			<column name="location_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[bbl is the ID]]></comment>
+			</column>
+			<column name="street" type="varchar" length="350" jt="12" />
+			<column name="city" type="varchar" length="350" jt="12" />
+			<column name="state" type="varchar" length="350" jt="12" />
+			<column name="zip_code" type="varchar" length="350" jt="12" />
+			<column name="latitude" type="integer" jt="4" />
+			<column name="longitude" type="integer" jt="4" />
+			<index name="pk_dim_location" unique="PRIMARY_KEY" >
+				<column name="location_id" />
+			</index>
+		</table>
+		<table name="dim_school" >
+			<column name="school_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[its the RECORD ID]]></comment>
+			</column>
+			<column name="school_name" type="varchar" length="300" jt="12" />
+			<index name="pk_dim_school" unique="PRIMARY_KEY" >
+				<column name="school_id" />
+			</index>
+		</table>
+		<table name="dim_type_of_establishment" >
+			<column name="establishment_type_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[MAKE ptet the  ID]]></comment>
+			</column>
+			<column name="site_type" type="varchar" length="500" jt="12" />
+			<column name="permitee" type="text" jt="12" />
+			<index name="pk_dim_type" unique="PRIMARY_KEY" >
+				<column name="establishment_type_id" />
+			</index>
+		</table>
+		<table name="dim_violation" >
+			<column name="violation_id" type="varchar" length="350" jt="12" mandatory="y" >
+				<comment><![CDATA[violation_code is the id]]></comment>
+			</column>
+			<column name="violation_description" type="varchar" length="500" jt="12" />
+			<column name="critical_level" type="varchar" length="350" jt="12" />
+			<index name="pk_dim_violation" unique="PRIMARY_KEY" >
+				<column name="violation_id" />
+			</index>
+		</table>
+		<table name="facts_dobmhschoolcafeteria" >
+			<column name="fact_id" type="integer" jt="4" mandatory="y" />
+			<column name="school_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="borough_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="building_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="location_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="violation_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="census_tract_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="establishment_type_id" type="varchar" length="350" jt="12" mandatory="y" />
+			<column name="last_inspection_date_id" type="integer" jt="4" mandatory="y" />
+			<column name="inspection_date_id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_facts_dobmhschoolcafeteria" unique="PRIMARY_KEY" >
+				<column name="fact_id" />
+			</index>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_school" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_school" >
+				<fk_column name="school_id" pk="school_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_borough" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_borough" >
+				<fk_column name="borough_id" pk="borough_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_building" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_building" >
+				<fk_column name="building_id" pk="building_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_location" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_location" >
+				<fk_column name="location_id" pk="location_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_violation" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_violation" >
+				<fk_column name="violation_id" pk="violation_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_census_tract" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_census_tract" >
+				<fk_column name="census_tract_id" pk="census_tract_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_type" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_type_of_establishment" >
+				<fk_column name="establishment_type_id" pk="establishment_type_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_0" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_date" >
+				<fk_column name="last_inspection_date_id" pk="date_id" />
+			</fk>
+			<fk name="fk_facts_dobmhschoolcafeteria_dim_date_1" to_schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" to_table="dim_date" >
+				<fk_column name="inspection_date_id" pk="date_id" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-1c89" confirmed="y" show_relation="columns" >
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_borough" color="C1D8EE" x="918" y="272" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_building" color="C1D8EE" x="918" y="459" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_census_tract" color="C1D8EE" x="323" y="748" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_date" color="C1D8EE" x="102" y="170" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_location" color="C1D8EE" x="901" y="629" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_school" color="C1D8EE" x="731" y="136" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_type_of_establishment" color="C1D8EE" x="51" y="595" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="dim_violation" color="C1D8EE" x="578" y="748" />
+		<entity schema="DOHMH-School-Cafeteria-Inspections-2020-Present.instance" name="facts_dobmhschoolcafeteria" color="C1D8EE" x="459" y="391" />
+		<callout x="51" y="51" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+		<script name="SQL_Editor" id="Editor-12fa" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA IF NOT EXISTS "instance";
+
+CREATE  TABLE "instance".dim_borough ( 
+	borough_id           varchar(350)  NOT NULL  ,
+	borough              varchar(300)    ,
+	CONSTRAINT pk_dim_borough PRIMARY KEY ( borough_id )
+ );
+
+CREATE  TABLE "instance".dim_building ( 
+	building_id          varchar(350)  NOT NULL  ,
+	building             varchar(350)    ,
+	CONSTRAINT pk_dim_building PRIMARY KEY ( building_id )
+ );
+
+CREATE  TABLE "instance".dim_census_tract ( 
+	census_tract_id      varchar(350)  NOT NULL  ,
+	community_board      integer    ,
+	council_district     integer    ,
+	nta                  varchar(350)    ,
+	CONSTRAINT pk_dim_census_tract PRIMARY KEY ( census_tract_id )
+ );
+
+CREATE  TABLE "instance".dim_date ( 
+	date_id              varchar(350)  NOT NULL  ,
+	"year"               integer    ,
+	month_number         integer    ,
+	quarter              integer    ,
+	day_name             varchar(350)    ,
+	month_name           varchar(350)    ,
+	week_of_the_month    integer    ,
+	week_of_year         integer    ,
+	date_iso_format      date    ,
+	CONSTRAINT pk_dim_date PRIMARY KEY ( date_id )
+ );
+
+CREATE  TABLE "instance".dim_location ( 
+	location_id          varchar(350)  NOT NULL  ,
+	street               varchar(350)    ,
+	city                 varchar(350)    ,
+	"state"              varchar(350)    ,
+	zip_code             varchar(350)    ,
+	latitude             integer    ,
+	longitude            integer    ,
+	CONSTRAINT pk_dim_location PRIMARY KEY ( location_id )
+ );
+
+CREATE  TABLE "instance".dim_school ( 
+	school_id            varchar(350)  NOT NULL  ,
+	school_name          varchar(300)    ,
+	CONSTRAINT pk_dim_school PRIMARY KEY ( school_id )
+ );
+
+CREATE  TABLE "instance".dim_type_of_establishment ( 
+	establishment_type_id varchar(350)  NOT NULL  ,
+	site_type            varchar(500)    ,
+	permitee             text    ,
+	CONSTRAINT pk_dim_type PRIMARY KEY ( establishment_type_id )
+ );
+
+CREATE  TABLE "instance".dim_violation ( 
+	violation_id         varchar(350)  NOT NULL  ,
+	violation_description varchar(500)    ,
+	critical_level       varchar(350)    ,
+	CONSTRAINT pk_dim_violation PRIMARY KEY ( violation_id )
+ );
+
+CREATE  TABLE "instance".facts_dobmhschoolcafeteria ( 
+	fact_id              integer  NOT NULL  ,
+	school_id            varchar(350)  NOT NULL  ,
+	borough_id           varchar(350)  NOT NULL  ,
+	building_id          varchar(350)  NOT NULL  ,
+	location_id          varchar(350)  NOT NULL  ,
+	violation_id         varchar(350)  NOT NULL  ,
+	census_tract_id      varchar(350)  NOT NULL  ,
+	establishment_type_id varchar(350)  NOT NULL  ,
+	last_inspection_date_id integer  NOT NULL  ,
+	inspection_date_id   integer  NOT NULL  ,
+	CONSTRAINT pk_facts_dobmhschoolcafeteria PRIMARY KEY ( fact_id )
+ );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_school FOREIGN KEY ( school_id ) REFERENCES "instance".dim_school( school_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_borough FOREIGN KEY ( borough_id ) REFERENCES "instance".dim_borough( borough_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_building FOREIGN KEY ( building_id ) REFERENCES "instance".dim_building( building_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_location FOREIGN KEY ( location_id ) REFERENCES "instance".dim_location( location_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_violation FOREIGN KEY ( violation_id ) REFERENCES "instance".dim_violation( violation_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_census_tract FOREIGN KEY ( census_tract_id ) REFERENCES "instance".dim_census_tract( census_tract_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_type FOREIGN KEY ( establishment_type_id ) REFERENCES "instance".dim_type_of_establishment( establishment_type_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_date_0 FOREIGN KEY ( last_inspection_date_id ) REFERENCES "instance".dim_date( date_id );
+
+ALTER TABLE "instance".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_date_1 FOREIGN KEY ( inspection_date_id ) REFERENCES "instance".dim_date( date_id );
+
+COMMENT ON COLUMN "instance".dim_borough.borough_id IS 'the borocode is the id';
+
+COMMENT ON COLUMN "instance".dim_building.building_id IS 'the bin is the id';
+
+COMMENT ON COLUMN "instance".dim_census_tract.census_tract_id IS 'the census tract is the id';
+
+COMMENT ON COLUMN "instance".dim_date.date_id IS 'MAKE ONE';
+
+COMMENT ON COLUMN "instance".dim_location.location_id IS 'bbl is the ID';
+
+COMMENT ON COLUMN "instance".dim_school.school_id IS 'its the RECORD ID';
+
+COMMENT ON COLUMN "instance".dim_type_of_establishment.establishment_type_id IS 'MAKE ptet the  ID';
+
+COMMENT ON COLUMN "instance".dim_violation.violation_id IS 'violation_code is the id';
+]]></string>
+		</script>
+	</layout>
+</project>
