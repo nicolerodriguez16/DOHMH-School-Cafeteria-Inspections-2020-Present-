@@ -1,0 +1,112 @@
+CREATE SCHEMA IF NOT EXISTS "dobmh_school_cafe";
+
+CREATE  TABLE "dobmh_school_cafe".dim_borough (
+	borough_id           varchar(300)  NOT NULL  ,
+	borough              varchar(300)    ,
+	CONSTRAINT pk_dim_borough PRIMARY KEY ( borough_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_building (
+	building_id          varchar(300)  NOT NULL  ,
+	building             varchar(350)    ,
+	CONSTRAINT pk_dim_building PRIMARY KEY ( building_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_census_tract (
+	census_tract_id      varchar(300)  NOT NULL  ,
+	community_board      varchar(300)    ,
+	council_district     varchar(300)    ,
+	nta                  varchar(350)    ,
+	CONSTRAINT pk_dim_census_tract PRIMARY KEY ( census_tract_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_date (
+	date_id              varchar(300)  NOT NULL  ,
+	"year"               integer    ,
+	month_number         integer    ,
+	quarter              integer    ,
+	day_name             varchar(350)    ,
+	month_name           varchar(350)    ,
+	week_of_the_month    integer    ,
+	week_of_year         integer    ,
+	date_iso_format      date    ,
+	CONSTRAINT pk_dim_date PRIMARY KEY ( date_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_location (
+	location_id          varchar(350)  NOT NULL  ,
+	street               varchar(350)    ,
+	city                 varchar(350)    ,
+	"state"              varchar(350)    ,
+	zip_code             varchar(350)    ,
+	latitude             integer    ,
+	longitude            integer    ,
+	CONSTRAINT pk_dim_location PRIMARY KEY ( location_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_school (
+	school_id            varchar(300)  NOT NULL  ,
+	school_name          varchar(300)    ,
+	CONSTRAINT pk_dim_school PRIMARY KEY ( school_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_type_of_establishment (
+	establishment_type_id varchar(300)  NOT NULL  ,
+	site_type            varchar(500)    ,
+	permitee             text    ,
+	CONSTRAINT pk_dim_type PRIMARY KEY ( establishment_type_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".dim_violation (
+	violation_id         varchar(300)  NOT NULL  ,
+	violation_description varchar(500)    ,
+	critical_level       varchar(350)    ,
+	CONSTRAINT pk_dim_violation PRIMARY KEY ( violation_id )
+ );
+
+CREATE  TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria (
+	fact_id              varchar(300)  NOT NULL  ,
+	school_id            varchar(300)  NOT NULL  ,
+	borough_id           varchar(300)  NOT NULL  ,
+	building_id          varchar(300)  NOT NULL  ,
+	location_id          varchar(300)  NOT NULL  ,
+	violation_id         varchar(300)  NOT NULL  ,
+	census_tract_id      varchar(300)  NOT NULL  ,
+	establishment_type_id varchar(300)  NOT NULL  ,
+	last_inspection_date_id varchar(300)  NOT NULL  ,
+	inspection_date_id   varchar(300)  NOT NULL  ,
+	CONSTRAINT pk_facts_dobmhschoolcafeteria PRIMARY KEY ( fact_id )
+ );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_school FOREIGN KEY ( school_id ) REFERENCES "dobmh_school_cafe".dim_school( school_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_borough FOREIGN KEY ( borough_id ) REFERENCES "dobmh_school_cafe".dim_borough( borough_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_building FOREIGN KEY ( building_id ) REFERENCES "dobmh_school_cafe".dim_building( building_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_location FOREIGN KEY ( location_id ) REFERENCES "dobmh_school_cafe".dim_location( location_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_violation FOREIGN KEY ( violation_id ) REFERENCES "dobmh_school_cafe".dim_violation( violation_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_census_tract FOREIGN KEY ( census_tract_id ) REFERENCES "dobmh_school_cafe".dim_census_tract( census_tract_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_type FOREIGN KEY ( establishment_type_id ) REFERENCES "dobmh_school_cafe".dim_type_of_establishment( establishment_type_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_date_0 FOREIGN KEY ( last_inspection_date_id ) REFERENCES "dobmh_school_cafe".dim_date( date_id );
+
+ALTER TABLE "dobmh_school_cafe".facts_dobmhschoolcafeteria ADD CONSTRAINT fk_facts_dobmhschoolcafeteria_dim_date_1 FOREIGN KEY ( inspection_date_id ) REFERENCES "dobmh_school_cafe".dim_date( date_id );
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_borough.borough_id IS 'the borocode is the id';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_building.building_id IS 'the bin is the id';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_census_tract.census_tract_id IS 'the census tract is the id';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_date.date_id IS 'MAKE ONE';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_location.location_id IS 'bbl is the ID';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_school.school_id IS 'its the RECORD ID';
+
+COMMENT ON COLUMN "dobmh_school_cafe".dim_type_of_establishment.establishment_type_id IS 'MAKE ptet the  ID';
+
