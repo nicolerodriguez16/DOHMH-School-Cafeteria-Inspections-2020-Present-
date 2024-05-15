@@ -9,3 +9,4 @@ Data Description: "The dataset contains current inspection data for cafeterias p
 4. Data Source: [NYC Open Data](https://data.cityofnewyork.us/Health/DOHMH-School-Cafeteria-Inspections-2020-Present-/5ery-qagt/about_data)
 Data Dictionary: [Readme.md](https://github.com/nicolerodriguez16/DOHMH-School-Cafeteria-Inspections-2020-Present-/blob/main/docs/School_cafeteria_data_dictionary_FINAL__9.23.2020_%20(1).xlsx)
 5. Dimensional Modeling: [Readme.md](https://github.com/nicolerodriguez16/DOHMH-School-Cafeteria-Inspections-2020-Present-/blob/main/datamodel/Untitled.dbs.bak)
+6. [Tableu Link](https://prod-useast-b.online.tableau.com/#/site/nicolerodriguez782fd2fcac3/workbooks/1573022?:origin=card_share_link)
